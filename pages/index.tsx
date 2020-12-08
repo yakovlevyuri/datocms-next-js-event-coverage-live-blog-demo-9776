@@ -48,6 +48,7 @@ export async function getServerSideProps() {
     props: {
       subscription: {
         ...graphqlRequest,
+        // @ts-ignore
         initialData: await request(graphqlRequest),
         token: process.env.NEXT_PUBLIC_DATOCMS_API_TOKEN,
       },
@@ -55,7 +56,7 @@ export async function getServerSideProps() {
   };
 }
 
-export default function Home({ subscription }) {
+export default function Home({ subscription }: { subscription: any }) {
   const { data, error, status } = useQuerySubscription(subscription);
 
   return (
@@ -111,7 +112,7 @@ export default function Home({ subscription }) {
       <div className="max-w-screen-sm mx-auto my-12">
         {data && (
           <TransitionGroup>
-            {data.posts.map((post) => (
+            {data.posts.map((post: any) => (
               <CSSTransition
                 key={post.id}
                 classNames={{
@@ -124,7 +125,7 @@ export default function Home({ subscription }) {
               >
                 <div>
                   <div className="overflow-hidden bg-white rounded-lg shadow-xl">
-                    {post.photos.map((photo) => (
+                    {post.photos.map((photo: any) => (
                       <Image
                         key={photo.responsiveImage.src}
                         className="w-full"

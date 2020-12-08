@@ -1,5 +1,6 @@
-import tiny from 'tiny-json-http';
+import tiny from "tiny-json-http";
 
+// @ts-ignore
 export async function request({ query, variables, preview }) {
   const endpoint = preview
     ? `https://graphql.datocms.com/preview`
